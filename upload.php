@@ -1,3 +1,0 @@
-<?php
-// Whilton Reis
-?>
