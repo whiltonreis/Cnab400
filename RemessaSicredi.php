@@ -117,7 +117,7 @@ Class RemessaSicredi{
         return str_pad($this->identificador, 7, "0", STR_PAD_LEFT);
     }
 
-	private function PreencherCaracteres($SetInt,$SetTipo){
+    private function PreencherCaracteres($SetInt,$SetTipo){
         if($SetTipo == 'zeros'){
           $this->caracter = '';
 	        for($i = 1; $i <= $SetInt; $i++){
