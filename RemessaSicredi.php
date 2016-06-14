@@ -149,11 +149,11 @@ Class RemessaSicredi{
     }
 
     private function Zeros($SetMin,$SetMax){
-		$this->conta = ($SetMax - strlen($SetMin));
-		$this->zeros = '';
-		  for($i = 0; $i < $this->conta; $i++){
-		    $this->zeros .= '0';
-		  }
+	$this->conta = ($SetMax - strlen($SetMin));
+	$this->zeros = '';
+	    for($i = 0; $i < $this->conta; $i++){
+		$this->zeros .= '0';
+             }
         return $this->zeros.$SetMin;
     }
 
