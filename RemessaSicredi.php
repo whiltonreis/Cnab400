@@ -93,7 +93,7 @@ Class RemessaSicredi{
 		$this->titulo.= '1';// 01 carácter - Identificação do arquivo remessa
 		$this->titulo.= '748';// 03 carácter - Número do SICREDI
 		$this->titulo.= $this->codCedente;// 05 carácter - Código do cedente
-		$this->titulo.= self::PreencherCaracteres('384','vazio'); // 01 carácter - em branco 
+		$this->titulo.= self::PreencherCaracteres('384','vazio'); // 384 carácter - em branco 
 		$this->titulo.= self::SequencialRemessa($this->setSequencia); // 06 carácter - Número seqüencial do registro 
 		$this->titulo.= chr(13).chr(10); //Quebra de linha 
 		
