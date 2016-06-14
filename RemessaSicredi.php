@@ -98,11 +98,11 @@ Class RemessaSicredi{
 		$this->titulo.= chr(13).chr(10); //Quebra de linha 
 		
         ## GERAR ARQUIVO
-		$this->NomeArquivo = $this->codCedente.substr(date('yd'), 1).'.CRM'; // permissão 777 na pasta onde vai gerar o arquivo
-		$this->fp = fopen($this->NomeArquivo, "w+");
+	$this->NomeArquivo = $this->codCedente.substr(date('yd'), 1).'.CRM'; // permissão 777 na pasta onde vai gerar o arquivo
+	$this->fp = fopen($this->NomeArquivo, "w+");
         $this->fp = fwrite(
         $this->fp, $this->titulo);
-		fclose($this->fp);	
+	fclose($this->fp);	
 	}
 
 /* @ Não Alterar a partir deste ponto */
@@ -112,7 +112,9 @@ Class RemessaSicredi{
     	$this->abrir = fopen($this->sequencia, "a+");
     	$this->identificador = fread($this->abrir, filesize($this->sequencia));
     	$this->gravar = fopen($this->sequencia, "w");
-    	if($this->identificador == '9999999'){$this->identificador = 1;}
+    	if($this->identificador == '9999999'){
+    		$this->identificador = 1;
+    	}
     	$this->grava = fwrite($this->gravar, $this->identificador+1);
         return str_pad($this->identificador, 7, "0", STR_PAD_LEFT);
     }
