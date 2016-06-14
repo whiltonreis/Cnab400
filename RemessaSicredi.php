@@ -98,11 +98,11 @@ Class RemessaSicredi{
 		$this->titulo.= chr(13).chr(10); //Quebra de linha 
 		
         ## GERAR ARQUIVO
-	$this->NomeArquivo = $this->codCedente.substr(date('yd'), 1).'.CRM'; // permissão 777 na pasta onde vai gerar o arquivo
-	$this->fp = fopen($this->NomeArquivo, "w+");
-        $this->fp = fwrite(
-        $this->fp, $this->titulo);
-	fclose($this->fp);	
+	        $this->NomeArquivo = $this->codCedente.substr(date('yd'), 1).'.CRM'; // permissão 777 na pasta onde vai gerar o arquivo
+	        $this->fp = fopen($this->NomeArquivo, "w+");
+                $this->fp = fwrite(
+                $this->fp, $this->titulo);
+	        fclose($this->fp);	
 	}
 
 /* @ Não Alterar a partir deste ponto */
