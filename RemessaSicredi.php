@@ -59,7 +59,7 @@ Class RemessaSicredi{
 		$this->titulo.= '0000'; // 04 carácter - % multa por pagamento em atraso 
 		$this->titulo.= self::PreencherCaracteres('12','vazio'); // 12 carácter - em Branco
 		$this->titulo.= '01'; // 02 carácter - Instrução / “01” - Cadastro de Títulos
-		$this->titulo.= date('mdhis'); // 10 carácter - Instrução / “01” - Cadastro de Títulos / Usei Mês, Dia, Hora, Minutos e Segundos
+		$this->titulo.= date('mdhis'); // 10 carácter - Seu Numero / Usei Mês, Dia, Hora, Minutos e Segundos
 		$this->titulo.= $this->sacado[1]; // 06 carácter - Data de vencimento "DDMMYY"
 		$this->titulo.= str_pad($this->sacado[2], 13, "0", STR_PAD_LEFT); // 13 carácter - Valor principal do título 
 		$this->titulo.= self::PreencherCaracteres('9','vazio'); // 09 carácter - em Branco
