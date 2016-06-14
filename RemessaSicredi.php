@@ -8,7 +8,7 @@
 
 Class RemessaSicredi{
  
- private $codCedente   = '47295';// Conta do Cedente com dig
+ private $codCedente   = '47295';// Codigo do Cedente
  private $cnpjCedente  = '20105220000197'; // Cnpj do Cedente
  private $setSequencia = '2';// Inicio da Sequëncia dos titulos 1- Para Header
 
