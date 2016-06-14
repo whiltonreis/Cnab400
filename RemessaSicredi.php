@@ -14,7 +14,7 @@ Class RemessaSicredi{
 
 	public function __construct($SetSacados){
 
-		## REGISTRO HEADER
+	## REGISTRO HEADER
 		$this->titulo = '0';// 01 carácter - Identificação do registro Header
 		$this->titulo.= '1';// 01 carácter - Identificação do arquivo remessa 
 		$this->titulo.= 'REMESSA';// 07 carácter - Literal remessa 
