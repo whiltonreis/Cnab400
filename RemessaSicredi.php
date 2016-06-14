@@ -135,17 +135,17 @@ Class RemessaSicredi{
     }
 
     private function SequencialRemessa($i){
-	    if($i < 10){
-		      return self::Zeros('0','5').$i;
-		  }elseif($i > 10 && $i < 100){
-		      return self::Zeros('0','4').$i;
-		  }elseif($i > 100 && $i < 1000){
-		       return self::Zeros('0','3').$i;
-		  }elseif($i > 1000 && $i < 10000){
-		       return self::Zeros('0','2').$i;
-		  }elseif($i > 10000 && $i < 100000){
-		      return self::Zeros('0','1').$i;
-	    }
+        if($i < 10){
+	      return self::Zeros('0','5').$i;
+	  }elseif($i > 10 && $i < 100){
+	      return self::Zeros('0','4').$i;
+	  }elseif($i > 100 && $i < 1000){
+	       return self::Zeros('0','3').$i;
+	  }elseif($i > 1000 && $i < 10000){
+	       return self::Zeros('0','2').$i;
+	  }elseif($i > 10000 && $i < 100000){
+	return self::Zeros('0','1').$i;
+	}
     }
 
     private function Zeros($SetMin,$SetMax){
