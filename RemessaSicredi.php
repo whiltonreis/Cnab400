@@ -105,7 +105,7 @@ Class RemessaSicredi{
 	        fclose($this->fp);	
 	}
 
-/* @ Não Alterar a partir deste ponto */
+    ##  Não Alterar a partir deste ponto
 
     private function NumeroDaRemessa(){
     	$this->sequencia  = 'NumRemessa';// permissão 777 na pasta onde vai gerar o arquivo
