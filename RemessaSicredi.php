@@ -114,7 +114,7 @@ Class RemessaSicredi{
 		// 06 carácter - Data de vencimento "DDMMYY"
 		$this->titulo.= self::VerificaDataLimite($this->sacado[1]); 
 		// 13 carácter - Valor principal do título 
-		$this->titulo.= str_pad($this->sacado[2], 13, "0", STR_PAD_LEFT); 
+		$this->titulo.= str_pad(self::FormatarValor($this->sacado[2]), 13, "0", STR_PAD_LEFT); 
 		// 09 carácter - em Branco
 		$this->titulo.= self::PreencherCaracteres('9','vazio'); 
 		// 01 carácter - Espécie de documento / "A" DMI
@@ -192,7 +192,6 @@ Class RemessaSicredi{
        $this->vencimento = self::GeraTimestamp($SetVencimento);
        $this->diferenca = $this->vencimento - $this->criacao;
        $this->dias = (int)floor( $this->diferenca / (60 * 60 * 24)); 
-
 	if($this->dias <= 7){
 	     print('Vencimento menor que o permitido -> '.$SetVencimento);
 	     exit;
@@ -200,9 +199,8 @@ Class RemessaSicredi{
 	     $this->partes = explode('/', $SetVencimento);
              $this->vencimento = $this->partes[2].'-'.$this->partes[1].'-'.$this->partes[0];
              $this->vencimento = date('dmy', strtotime($this->vencimento));
-		return $this->vencimento;
+	     return $this->vencimento;
 	}
-          
     }
 
     private function GeraTimestamp($SetData) {
@@ -210,6 +208,12 @@ Class RemessaSicredi{
        return mktime(0, 0, 0, $this->partes[1], $this->partes[0], $this->partes[2]);
     }
 
+    private function FormatarValor($SetValor){
+       $this->valor = str_replace("." , "" , $SetValor);
+       $this->valor = str_replace("," , "" , $SetValor);
+       return $this->valor;
+    }
+    
     private function SelecionaTipoPessoa($SetPessoa){
        if(strlen($SetPessoa) == '11'){
             //Pessoa Física
@@ -358,16 +362,16 @@ Class RemessaSicredi{
 ## LEGENDA
 //0 - Nosso Numero / Max 05 carácter
 //1 - Data Vencimento / Formato DD/MM/YYYY
-//2 - Valor do Titulo / Sem formatação ex. 2,00 = 200
+//2 - Valor do Titulo / Sem formatação ex. 2,00
 //3 - Cpf ou Cnpj
 //4 - Nome do Sacado
 //5 - Endereço do Sacado
 //6 - Cep do Sacado
 
 ### DADOS DOS CLIENTES PARA TESTE
-$GetTitulo[] = array('129','27/06/2016','200','03829504969','JOAO NINGUEM DA SILVA','R. JORGIOR DE ARMANI, 172','86083310');
-$GetTitulo[] = array('139','01/08/2016','300','03829504969','MARIA DA SILVA NASCIM','R. JORGIOR DE ARMANI, 145','86083310');
-$GetTitulo[] = array('149','01/08/2016','400','20105220000197','ABREU DA SILVA JUNIOR','R. JORGIOR DE ARMANI, 167','86083310');
+$GetTitulo[] = array('129','27/06/2016','2,00','03829504969','JOAO NINGUEM DA SILVA','R. JORGIOR DE ARMANI, 172','86083310');
+$GetTitulo[] = array('139','01/08/2016','3,00','03829504969','MARIA DA SILVA NASCIM','R. JORGIOR DE ARMANI, 145','86083310');
+$GetTitulo[] = array('149','01/08/2016','4,00','20105220000197','ABREU DA SILVA JUNIOR','R. JORGIOR DE ARMANI, 167','86083310');
 
 new RemessaSicredi($GetTitulo);
 
