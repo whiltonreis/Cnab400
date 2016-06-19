@@ -353,7 +353,9 @@ Class RemessaSicredi{
 	   $this->NomeArquivo = $this->codCedente.$this->codMes.'.CRM'; 
 	   $this->fp = fopen($this->NomeArquivo, "w+");
            $this->fp = fwrite($this->fp, $SetConteudo);
-	   fclose($this->fp);	
+            if($this->fp){
+	     print('Arquivo <a href='.$this->NomeArquivo.'>'.$this->NomeArquivo.'</a> gerado com sucesso!');	
+	    }
 	}
 	
 }
@@ -362,7 +364,7 @@ Class RemessaSicredi{
 ## LEGENDA
 //0 - Nosso Numero / Max 05 carácter
 //1 - Data Vencimento / Formato DD/MM/YYYY
-//2 - Valor do Titulo / Sem formatação ex. 2,00
+//2 - Valor do Titulo / ex. 2,00
 //3 - Cpf ou Cnpj
 //4 - Nome do Sacado
 //5 - Endereço do Sacado
