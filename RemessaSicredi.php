@@ -7,20 +7,20 @@
 */
 
 Class RemessaSicredi{
- // 14 carácter / Cnpj do Cedente
- private $cnpjCedente  = '20105220000197';
- // 04 carácter / Agência do Cedente
- private $agCedente    = '0718'; 
- // 05 carácter / Conta do Cedente sem digito
- private $codCedente   = '47295';
- // 02 carácter / Posto do Cedente
- private $postoCedente = '61';
- // 01 carácter / Byte de Identificação do cedente 1 - Cooperativa; 2 a 9 - Cedente
- private $byteidt      = '1';
- // Fixado numero 2 Inicio da Sequëncia dos titulos (1 Reservado Para o Header)
- private $setSequencia = '2';
- // 01 carácter - Postagem do título / “S”- Para postar o título / “N” - Não postar e remeter para o Cedente
- private $postarTitulo = 'N';
+  // 14 carácter / Cnpj do Cedente
+  private $cnpjCedente  = '20105220000197';
+  // 04 carácter / Agência do Cedente
+  private $agCedente    = '0718'; 
+  // 05 carácter / Conta do Cedente sem digito
+  private $codCedente   = '47295';
+  // 02 carácter / Posto do Cedente
+  private $postoCedente = '61';
+  // 01 carácter / Byte de Identificação do cedente 1 - Cooperativa; 2 a 9 - Cedente
+  private $byteidt      = '1';
+  // Fixado numero 2 Inicio da Sequëncia dos titulos (1 Reservado Para o Header)
+  private $setSequencia = '2';
+  // 01 carácter - Postagem do título / “S”- Para postar o título / “N” - Não postar e remeter para o Cedente
+  private $postarTitulo = 'N';
  
 	
 	public function __construct($SetSacados){
