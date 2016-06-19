@@ -186,58 +186,58 @@ Class RemessaSicredi{
 	}
 
     ## FUNÇÕES NÃO ALTERAR
-    private function VerificaDataLimite($SetVencimento){
-       $this->criacao = date('d/m/Y');
-       $this->criacao = self::GeraTimestamp($this->criacao);
-       $this->vencimento = self::GeraTimestamp($SetVencimento);
-       $this->diferenca = $this->vencimento - $this->criacao;
-       $this->dias = (int)floor( $this->diferenca / (60 * 60 * 24)); 
-	if($this->dias <= 7){
-	     print('Vencimento menor que o permitido -> '.$SetVencimento);
-	     exit;
-	}else{
-	     $this->partes = explode('/', $SetVencimento);
-             $this->vencimento = $this->partes[2].'-'.$this->partes[1].'-'.$this->partes[0];
-             $this->vencimento = date('dmy', strtotime($this->vencimento));
-	     return $this->vencimento;
+	private function VerificaDataLimite($SetVencimento){
+	   $this->criacao = date('d/m/Y');
+	   $this->criacao = self::GeraTimestamp($this->criacao);
+	   $this->vencimento = self::GeraTimestamp($SetVencimento);
+	   $this->diferenca = $this->vencimento - $this->criacao;
+	   $this->dias = (int)floor( $this->diferenca / (60 * 60 * 24)); 
+	      if($this->dias <= 7){
+		   print('Vencimento menor que o permitido -> '.$SetVencimento);
+		   exit;
+	      }else{
+		   $this->partes = explode('/', $SetVencimento);
+	           $this->vencimento = $this->partes[2].'-'.$this->partes[1].'-'.$this->partes[0];
+	           $this->vencimento = date('dmy', strtotime($this->vencimento));
+		   return $this->vencimento;
+	      }
 	}
-    }
 
-    private function GeraTimestamp($SetData) {
-       $this->partes = explode('/', $SetData);
-       return mktime(0, 0, 0, $this->partes[1], $this->partes[0], $this->partes[2]);
-    }
+	private function GeraTimestamp($SetData) {
+	   $this->partes = explode('/', $SetData);
+	   return mktime(0, 0, 0, $this->partes[1], $this->partes[0], $this->partes[2]);
+	}
 
-    private function FormatarValor($SetValor){
-       $this->valor = str_replace("." , "" , $SetValor);
-       $this->valor = str_replace("," , "" , $SetValor);
-       return $this->valor;
-    }
+	private function FormatarValor($SetValor){
+	   $this->valor = str_replace("." , "" , $SetValor);
+	   $this->valor = str_replace("," , "" , $SetValor);
+	   return $this->valor;
+	}
     
-    private function SelecionaTipoPessoa($SetPessoa){
-       if(strlen($SetPessoa) == '11'){
-            //Pessoa Física
-            $this->tipoPessoa = '1';
-       }elseif(strlen($SetPessoa) == '14'){
-            //Pessoa Jurídica
-            $this->tipoPessoa = '2';
-       }else{
-          print('Digite um Cpf com 11 Digitos ou Cnpj com 14 Digitos');
-          exit;
-       }
-       return $this->tipoPessoa;
-    }
+	private function SelecionaTipoPessoa($SetPessoa){
+	   if(strlen($SetPessoa) == '11'){
+	       //Pessoa Física
+	       $this->tipoPessoa = '1';
+	   }elseif(strlen($SetPessoa) == '14'){
+	       //Pessoa Jurídica
+	       $this->tipoPessoa = '2';
+	   }else{
+	       print('Digite um Cpf com 11 Digitos ou Cnpj com 14 Digitos');
+	       exit;
+	   }
+	   return $this->tipoPessoa;
+	}
         
-    private function GerarNossoNumero($SetNossoNumero){
-       $this->NossoNumero = date('y').$this->byteidt.str_pad($SetNossoNumero, 5, "0", STR_PAD_LEFT).
-       self::DigitoNossoNumero(
-       $this->agCedente.
-       $this->postoCedente.
-       $this->codCedente.
-       date('y').$this->byteidt.str_pad($this->sacado[0], 5, "0", STR_PAD_LEFT)
-       );
-      return $this->NossoNumero;
-    }
+	private function GerarNossoNumero($SetNossoNumero){
+	   $this->NossoNumero = date('y').$this->byteidt.str_pad($SetNossoNumero, 5, "0", STR_PAD_LEFT).
+	   self::DigitoNossoNumero(
+	   $this->agCedente.
+	   $this->postoCedente.
+	   $this->codCedente.
+	   date('y').$this->byteidt.str_pad($this->sacado[0], 5, "0", STR_PAD_LEFT)
+	   );
+	  return $this->NossoNumero;
+	}
         
 	private function DigitoNossoNumero($SetNumero) {
 	   $this->resto = self::ModuloOnze($SetNumero, 9, 1);
