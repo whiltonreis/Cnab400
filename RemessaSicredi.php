@@ -45,7 +45,7 @@ Class RemessaSicredi{
 		// 03 carácter - Número do SICREDI 
 		$this->titulo.= '748'; 
 		// 15 carácter - 'SICREDI'= 07 e Brancos = 08
-		$this->titulo.= 'Sicredi'.self::PreencherCaracteres('8','vazio'); 
+		$this->titulo.= 'SICREDI'.self::PreencherCaracteres('8','vazio'); 
 		// 08 carácter - Data de gravação do arquivo 'AAAAMMDD'
 		$this->titulo.= date('Ymd'); 
 		// 08 carácter - em Branco
@@ -193,7 +193,7 @@ Class RemessaSicredi{
 	   $this->diferenca = $this->vencimento - $this->criacao;
 	   $this->dias = (int)floor( $this->diferenca / (60 * 60 * 24)); 
 	      if($this->dias <= 7){
-		   print('Vencimento menor que o permitido -> '.$SetVencimento);
+		   print('Minimo para vencimento é de 7 dias -> '.$SetVencimento);
 		   exit;
 	      }else{
 		   $this->partes = explode('/', $SetVencimento);
