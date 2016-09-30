@@ -15,8 +15,8 @@ Class RemessaSicredi{
   private $ctCedente    = '47295';
   // Digito da Conta Cedente
   private $dgCcedente   = '4';
-  // 05 carácter / Conta do Cedente sem digito
-  private $codCedente   = '47290';//Completar com zero
+  // 05 carácter / Codigo do Cedente
+  private $codCedente   = '47290';
   // 02 carácter / Posto do Cedente
   private $postoCedente = '61';
   // 01 carácter / Byte de Identificação do cedente 1 - Cooperativa; 2 a 9 - Cedente
