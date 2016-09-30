@@ -11,6 +11,10 @@ Class RemessaSicredi{
   private $cnpjCedente  = '20105220000197';
   // 04 carácter / Agência do Cedente
   private $agCedente    = '0718'; 
+  // Conta do Cedente sem Dv
+  private $ctCedente    = '47295';
+  // Digito da Conta Cedente
+  private $dgCcedente   = '4';
   // 05 carácter / Conta do Cedente sem digito
   private $codCedente   = '47290';//Completar com zero
   // 02 carácter / Posto do Cedente
@@ -173,8 +177,8 @@ Class RemessaSicredi{
 		$this->titulo.= '1';
 		// 03 carácter - Número do SICREDI
 		$this->titulo.= '748';
-		// 05 carácter - Código do cedente
-		$this->titulo.= $this->codCedente;
+		// 05 carácter - Conta Corrente sem o DV
+		$this->titulo.= $this->ctCedente;
 		// 384 carácter - em branco 
 		$this->titulo.= self::PreencherCaracteres('384','vazio'); 
 		// 06 carácter - Número seqüencial do registro 
@@ -350,7 +354,7 @@ Class RemessaSicredi{
              $this->codMes = substr(date('md'), 1);
            }
 	   // permissão 777 na pasta onde vai gerar o arquivo
-	   $this->NomeArquivo = $this->codCedente.$this->codMes.'.CRM'; 
+	   $this->NomeArquivo = $this->ctCedente.$this->codMes.'.CRM'; 
 	   $this->fp = fopen($this->NomeArquivo, "w+");
            $this->fp = fwrite($this->fp, $SetConteudo);
             if($this->fp){
