@@ -1,5 +1,4 @@
 <?php
-
 /**
 * @ Autor: Whilton Reis
 * @ Data : 14/06/2016
@@ -10,11 +9,11 @@ Class RemessaSicredi{
   // 14 carácter / Cnpj do Cedente
   private $cnpjCedente     = '20105220000197';
   // 04 carácter / Agência do Cedente
-  private $agCedente       = '0718'; 
+  private $agenciaCedente  = '0718'; 
   // 05 carácter / Conta do Cedente sem Dv
-  private $ctCedente       = '47295';
+  private $contaCedente    = '47295';
   // 01 carácter / Digito da Conta Cedente
-  private $dgCcedente      = '4';
+  private $digitoCcedente  = '4';
   // 05 carácter / Codigo do Beneficiário 
   private $codBeneficiario = '47290';
   // 02 carácter / Posto do Cedente
@@ -178,7 +177,7 @@ Class RemessaSicredi{
 		// 03 carácter - Número do SICREDI
 		$this->titulo.= '748';
 		// 05 carácter - Conta Corrente sem o DV
-		$this->titulo.= $this->ctCedente;
+		$this->titulo.= $this->contaCedente;
 		// 384 carácter - em branco 
 		$this->titulo.= self::PreencherCaracteres('384','vazio'); 
 		// 06 carácter - Número seqüencial do registro 
@@ -235,7 +234,7 @@ Class RemessaSicredi{
 	private function GerarNossoNumero($SetNossoNumero){
 	   $this->NossoNumero = date('y').$this->byteidt.str_pad($SetNossoNumero, 5, "0", STR_PAD_LEFT).
 	   self::DigitoNossoNumero(
-	   $this->agCedente.
+	   $this->agenciaCedente.
 	   $this->postoCedente.
 	   $this->codBeneficiario.
 	   date('y').$this->byteidt.str_pad($this->sacado[0], 5, "0", STR_PAD_LEFT)
