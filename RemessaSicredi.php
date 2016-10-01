@@ -7,21 +7,19 @@
 
 Class RemessaSicredi{
   // 14 carácter / Cnpj do Cedente
-  private $cnpjCedente     = '20105220000197';
+  private $cnpjCedente    = '20105220000197';
   // 04 carácter / Agência do Cedente
-  private $agenciaCedente  = '0718'; 
-  // 05 carácter / Conta do Cedente sem Dv
-  private $contaCedente    = '47295';
-  // 05 carácter / Codigo do Beneficiário 
-  private $codBeneficiario = '47290';
+  private $agenciaCedente = '0718'; 
+  // 05 carácter / Codigo do Cedente 
+  private $codCedente     = '47290';
   // 02 carácter / Posto do Cedente
-  private $postoCedente    = '61';
+  private $postoCedente   = '61';
   // 01 carácter / Byte de Identificação do cedente 1 - Cooperativa; 2 a 9 - Cedente
-  private $byteidt         = '2';
+  private $byteidt        = '2';
   // Fixado numero 2 Inicio da Sequëncia dos titulos (1 Reservado Para o Header)
-  private $setSequencia    = '2';
+  private $setSequencia   = '2';
   // 01 carácter - Postagem do título / “S”- Para postar o título / “N” - Não postar e remeter para o Cedente
-  private $postarTitulo    = 'N';
+  private $postarTitulo   = 'N';
  
 	
 	public function __construct($SetSacados){
@@ -36,8 +34,8 @@ Class RemessaSicredi{
 		$this->titulo.= '01';
 		// 15 carácter  - 'COBRANCA'= 08 e Brancos = 07
 		$this->titulo.= 'COBRANCA'.self::PreencherCaracteres('7','vazio');
-		// 05 carácter / Codigo do Beneficiário 
-		$this->titulo.= $this->codBeneficiario; 
+		// 05 carácter / Codigo do Cedente 
+		$this->titulo.= $this->codCedente; 
 		// 14 carácter - CNPJ do cedente
 		$this->titulo.= $this->cnpjCedente;
 		// 31 carácter - em Branco
@@ -173,8 +171,8 @@ Class RemessaSicredi{
 		$this->titulo.= '1';
 		// 03 carácter - Número do SICREDI
 		$this->titulo.= '748';
-		// 05 carácter - Conta Corrente sem o DV
-		$this->titulo.= $this->contaCedente;
+		// 05 carácter - Codigo do Cedente
+		$this->titulo.= $this->codCedente;
 		// 384 carácter - em branco 
 		$this->titulo.= self::PreencherCaracteres('384','vazio'); 
 		// 06 carácter - Número seqüencial do registro 
@@ -233,7 +231,7 @@ Class RemessaSicredi{
 	   self::DigitoNossoNumero(
 	   $this->agenciaCedente.
 	   $this->postoCedente.
-	   $this->codBeneficiario.
+	   $this->codCedente.
 	   date('y').$this->byteidt.str_pad($this->sacado[0], 5, "0", STR_PAD_LEFT)
 	   );
 	  return $this->NossoNumero;
@@ -350,7 +348,7 @@ Class RemessaSicredi{
              $this->codMes = substr(date('md'), 1);
            }
 	   // permissão 777 na pasta onde vai gerar o arquivo
-	   $this->NomeArquivo = $this->codBeneficiario.$this->codMes.'.CRM'; 
+	   $this->NomeArquivo = $this->codCedente.$this->codMes.'.CRM'; 
 	   $this->fp = fopen($this->NomeArquivo, "w+");
            $this->fp = fwrite($this->fp, $SetConteudo);
             if($this->fp){
