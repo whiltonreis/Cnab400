@@ -11,7 +11,7 @@ Class RemessaSicredi{
   // 04 carácter / Agência do Cedente
   private $agenciaCedente = '0718'; 
   // 05 carácter / Codigo do Cedente 
-  private $codCedente     = '47290';
+  private $codCedente     = '47295';
   // 02 carácter / Posto do Cedente
   private $postoCedente   = '61';
   // 01 carácter / Byte de Identificação do cedente 1 - Cooperativa; 2 a 9 - Cedente
