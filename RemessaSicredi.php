@@ -12,8 +12,6 @@ Class RemessaSicredi{
   private $agenciaCedente  = '0718'; 
   // 05 carácter / Conta do Cedente sem Dv
   private $contaCedente    = '47295';
-  // 01 carácter / Digito da Conta Cedente
-  private $digitoCcedente  = '4';
   // 05 carácter / Codigo do Beneficiário 
   private $codBeneficiario = '47290';
   // 02 carácter / Posto do Cedente
@@ -27,7 +25,6 @@ Class RemessaSicredi{
  
 	
 	public function __construct($SetSacados){
-
 	## REGISTRO HEADER
 	    // 01 carácter - Identificação do registro Header
 		$this->titulo = '0';
