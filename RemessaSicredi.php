@@ -21,9 +21,8 @@ Class RemessaSicredi{
   // 01 carácter - Postagem do título / “S”- Para postar o título / “N” - Não postar e remeter para o Cedente
   private $postarTitulo   = 'N';
  
-	
-	public function __construct($SetSacados){
-	## REGISTRO HEADER
+     ## REGISTRO HEADER
+	public function __construct($SetSacados){	
 	    // 01 carácter - Identificação do registro Header
 		$this->titulo = '0';
 		// 01 carácter - Identificação do arquivo remessa
@@ -59,7 +58,7 @@ Class RemessaSicredi{
 		//Quebra de linha 
 		$this->titulo.= chr(13).chr(10); 
 
-    ## REGISTRO DETALHE (OBRIGATORIO)
+     ## REGISTRO DETALHE (OBRIGATORIO)
 	foreach($SetSacados as $this->sacado){
 		// 01 carácter - Identificação do registro
 		$this->titulo.= '1';
@@ -164,7 +163,7 @@ Class RemessaSicredi{
 		//Quebra de linha 		
 		$this->titulo.= chr(13).chr(10); 
 	}
-    ## REGISTRO TRILER
+     ## REGISTRO TRILER
 		// 01 carácter - Identificação do registro titulo
 		$this->titulo.= '9';
 		// 01 carácter - Identificação do arquivo remessa
@@ -183,7 +182,7 @@ Class RemessaSicredi{
 		self::GerarArquivo($this->titulo);
 	}
 
-    ## FUNÇÕES NÃO ALTERAR
+     ## FUNÇÕES NÃO ALTERAR
 	private function VerificaDataLimite($SetVencimento){
 	   $this->criacao = date('d/m/Y');
 	   $this->criacao = self::GeraTimestamp($this->criacao);
