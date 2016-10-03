@@ -1,29 +1,27 @@
 <?php
-
 /**
 * @ Autor: Whilton Reis
 * @ Data : 14/06/2016
 * @ Remessa Sicredi Cnab400
 */
-
 Class RemessaSicredi{
   // 14 carácter / Cnpj do Cedente
-  private $cnpjCedente    = '20105220000197';
+  private $cnpjCedente  = '20105220000197';
   // 04 carácter / Agência do Cedente
-  private $agenciaCedente = '0718'; 
-  // 05 carácter / Codigo do Cedente 
-  private $codCedente     = '47295';
+  private $agCedente    = '0718'; 
+  // 05 carácter / Codigo do Cedente
+  private $codCedente   = '47290';
   // 02 carácter / Posto do Cedente
-  private $postoCedente   = '61';
+  private $postoCedente = '61';
   // 01 carácter / Byte de Identificação do cedente 1 - Cooperativa; 2 a 9 - Cedente
-  private $byteidt        = '2';
+  private $byteidt      = '2';
   // Fixado numero 2 Inicio da Sequëncia dos titulos (1 Reservado Para o Header)
-  private $setSequencia   = '2';
+  private $setSequencia = '2';
   // 01 carácter - Postagem do título / “S”- Para postar o título / “N” - Não postar e remeter para o Cedente
-  private $postarTitulo   = 'N';
- 
-     ## REGISTRO HEADER
-	public function __construct($SetSacados){	
+  private $postarTitulo = 'N'; 
+	
+	public function __construct($SetSacados){
+	## REGISTRO HEADER
 	    // 01 carácter - Identificação do registro Header
 		$this->titulo = '0';
 		// 01 carácter - Identificação do arquivo remessa
@@ -34,7 +32,7 @@ Class RemessaSicredi{
 		$this->titulo.= '01';
 		// 15 carácter  - 'COBRANCA'= 08 e Brancos = 07
 		$this->titulo.= 'COBRANCA'.self::PreencherCaracteres('7','vazio');
-		// 05 carácter / Codigo do Cedente 
+		// 05 carácter / Codigo do Cedente
 		$this->titulo.= $this->codCedente; 
 		// 14 carácter - CNPJ do cedente
 		$this->titulo.= $this->cnpjCedente;
@@ -58,8 +56,7 @@ Class RemessaSicredi{
 		$this->titulo.= self::SequencialRemessa('1'); 
 		//Quebra de linha 
 		$this->titulo.= chr(13).chr(10); 
-
-     ## REGISTRO DETALHE (OBRIGATORIO)
+        ## REGISTRO DETALHE (OBRIGATORIO)
 	foreach($SetSacados as $this->sacado){
 		// 01 carácter - Identificação do registro
 		$this->titulo.= '1';
@@ -164,14 +161,14 @@ Class RemessaSicredi{
 		//Quebra de linha 		
 		$this->titulo.= chr(13).chr(10); 
 	}
-     ## REGISTRO TRILER
+        ## REGISTRO TRILER
 		// 01 carácter - Identificação do registro titulo
 		$this->titulo.= '9';
 		// 01 carácter - Identificação do arquivo remessa
 		$this->titulo.= '1';
 		// 03 carácter - Número do SICREDI
 		$this->titulo.= '748';
-		// 05 carácter - Codigo do Cedente
+		// 05 carácter - Código do cedente
 		$this->titulo.= $this->codCedente;
 		// 384 carácter - em branco 
 		$this->titulo.= self::PreencherCaracteres('384','vazio'); 
@@ -182,8 +179,7 @@ Class RemessaSicredi{
 		//Gerar Arquivo
 		self::GerarArquivo($this->titulo);
 	}
-
-     ## FUNÇÕES NÃO ALTERAR
+        ## FUNÇÕES NÃO ALTERAR
 	private function VerificaDataLimite($SetVencimento){
 	   $this->criacao = date('d/m/Y');
 	   $this->criacao = self::GeraTimestamp($this->criacao);
@@ -200,12 +196,10 @@ Class RemessaSicredi{
 		   return $this->vencimento;
 	      }
 	}
-
 	private function GeraTimestamp($SetData) {
 	   $this->partes = explode('/', $SetData);
 	   return mktime(0, 0, 0, $this->partes[1], $this->partes[0], $this->partes[2]);
 	}
-
 	private function FormatarValor($SetValor){
 	   $this->valor = str_replace("." , "" , $SetValor);
 	   $this->valor = str_replace("," , "" , $SetValor);
@@ -229,7 +223,7 @@ Class RemessaSicredi{
 	private function GerarNossoNumero($SetNossoNumero){
 	   $this->NossoNumero = date('y').$this->byteidt.str_pad($SetNossoNumero, 5, "0", STR_PAD_LEFT).
 	   self::DigitoNossoNumero(
-	   $this->agenciaCedente.
+	   $this->agCedente.
 	   $this->postoCedente.
 	   $this->codCedente.
 	   date('y').$this->byteidt.str_pad($this->sacado[0], 5, "0", STR_PAD_LEFT)
@@ -247,7 +241,6 @@ Class RemessaSicredi{
 	     }
 	  return $this->dv;
 	}
-
 	private function ModuloOnze($SetNum, $SetBase=9, $SetR=0)  {
 	   $this->soma = 0;
 	   $this->fator = 2;
@@ -270,7 +263,6 @@ Class RemessaSicredi{
 	        return $this->digito;
 	    }
 	}
-
 	private function NumeroDaRemessa(){
 	   // permissão 777 na pasta onde vai gerar o arquivo
 	   $this->sequencia  = 'NumRemessa';
@@ -283,7 +275,6 @@ Class RemessaSicredi{
 	    $this->grava = fwrite($this->gravar, $this->identificador+1);
 	    return str_pad($this->identificador, 7, "0", STR_PAD_LEFT);
 	}
-
 	private function PreencherCaracteres($SetInt,$SetTipo){
            if($SetTipo == 'zeros'){
              $this->caracter = '';
@@ -298,7 +289,6 @@ Class RemessaSicredi{
             }
          return $this->caracter;
 	}
-
 	private function SequencialRemessa($i){
 	   if($i < 10){
 	      return self::Zeros('0','5').$i;
@@ -312,7 +302,6 @@ Class RemessaSicredi{
 	      return self::Zeros('0','1').$i;
 	    }
 	}
-
 	private function Zeros($SetMin,$SetMax){
 	   $this->conta = ($SetMax - strlen($SetMin));
 	   $this->zeros = '';
@@ -321,7 +310,6 @@ Class RemessaSicredi{
 	     }
           return $this->zeros.$SetMin;
 	}
-
 	private function LimitCaracteres($SetPalavra,$SetLimite){
 	   if(strlen($SetPalavra) >= $SetLimite){
 	       $this->var = substr($SetPalavra, 0,$SetLimite);
@@ -331,7 +319,6 @@ Class RemessaSicredi{
 	    }
           return $this->var;
 	}
-
 	private function FiltrarNomeEndereco($SetPalavra){
            $this->string = preg_replace("/&([a-z])[a-z]+;/i", "$1", htmlentities(trim($SetPalavra)));
            return self::LimitCaracteres(strtoupper($this->string),'40');	
@@ -358,7 +345,6 @@ Class RemessaSicredi{
 	
 }
 ## EXEMPLO DE USO
-
 ## LEGENDA
 //0 - Nosso Numero / Max 05 carácter
 //1 - Data Vencimento / Formato DD/MM/YYYY
@@ -369,9 +355,8 @@ Class RemessaSicredi{
 //6 - Cep do Sacado
 
 ### DADOS DOS CLIENTES PARA TESTE
-$GetTitulo[] = array('129','27/06/2016','2,00','03829504969','JOAO NINGUEM DA SILVA','R. JORGIOR DE ARMANI, 172','86083310');
+$GetTitulo[] = array('129','27/10/2016','2,00','03829504969','JOAO NINGUEM DA SILVA','R. JORGIOR DE ARMANI, 172','86083310');
 $GetTitulo[] = array('139','01/08/2016','3,00','03829504969','MARIA DA SILVA NASCIM','R. JORGIOR DE ARMANI, 145','86083310');
 $GetTitulo[] = array('149','01/08/2016','4,00','20105220000197','ABREU DA SILVA JUNIOR','R. JORGIOR DE ARMANI, 167','86083310');
 
 new RemessaSicredi($GetTitulo);
-
