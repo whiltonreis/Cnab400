@@ -196,10 +196,12 @@ Class RemessaSicredi{
 		   return $this->vencimento;
 	      }
 	}
+
 	private function GeraTimestamp($SetData) {
 	   $this->partes = explode('/', $SetData);
 	   return mktime(0, 0, 0, $this->partes[1], $this->partes[0], $this->partes[2]);
 	}
+
 	private function FormatarValor($SetValor){
 	   $this->valor = str_replace("." , "" , $SetValor);
 	   $this->valor = str_replace("," , "" , $SetValor);
@@ -241,6 +243,7 @@ Class RemessaSicredi{
 	     }
 	  return $this->dv;
 	}
+
 	private function ModuloOnze($SetNum, $SetBase=9, $SetR=0)  {
 	   $this->soma = 0;
 	   $this->fator = 2;
@@ -263,6 +266,7 @@ Class RemessaSicredi{
 	        return $this->digito;
 	    }
 	}
+
 	private function NumeroDaRemessa(){
 	   // permissão 777 na pasta onde vai gerar o arquivo
 	   $this->sequencia  = 'NumRemessa';
@@ -275,6 +279,7 @@ Class RemessaSicredi{
 	    $this->grava = fwrite($this->gravar, $this->identificador+1);
 	    return str_pad($this->identificador, 7, "0", STR_PAD_LEFT);
 	}
+
 	private function PreencherCaracteres($SetInt,$SetTipo){
            if($SetTipo == 'zeros'){
              $this->caracter = '';
@@ -289,6 +294,7 @@ Class RemessaSicredi{
             }
          return $this->caracter;
 	}
+
 	private function SequencialRemessa($i){
 	   if($i < 10){
 	      return self::Zeros('0','5').$i;
@@ -302,6 +308,7 @@ Class RemessaSicredi{
 	      return self::Zeros('0','1').$i;
 	    }
 	}
+
 	private function Zeros($SetMin,$SetMax){
 	   $this->conta = ($SetMax - strlen($SetMin));
 	   $this->zeros = '';
@@ -310,6 +317,7 @@ Class RemessaSicredi{
 	     }
           return $this->zeros.$SetMin;
 	}
+
 	private function LimitCaracteres($SetPalavra,$SetLimite){
 	   if(strlen($SetPalavra) >= $SetLimite){
 	       $this->var = substr($SetPalavra, 0,$SetLimite);
@@ -319,6 +327,7 @@ Class RemessaSicredi{
 	    }
           return $this->var;
 	}
+
 	private function FiltrarNomeEndereco($SetPalavra){
            $this->string = preg_replace("/&([a-z])[a-z]+;/i", "$1", htmlentities(trim($SetPalavra)));
            return self::LimitCaracteres(strtoupper($this->string),'40');	
