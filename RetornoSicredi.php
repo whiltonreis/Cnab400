@@ -18,16 +18,16 @@ Class RetornoSicredi{
 		$vetor[0] = substr($retorno[0],26, -371);
 		//Titulos
 		for($i = 1;$i < $vetores-1;$i++){
-			//Numero do Boleto
-			$vetor[1] = intval(substr($retorno[$i],50, -347));
-			//Data de Pagamento
+		    //Numero do Boleto
+		    $vetor[1] = intval(substr($retorno[$i],50, -347));
+		    //Data de Pagamento
 		    $vetor[2] = substr($retorno[$i],328, -9);
-			//Valor do Boleto
+		    //Valor do Boleto
 		    $vetor[3] = intval(substr($retorno[$i], 152, -235));
-			//Valor Pago
+		    //Valor Pago
 		    $vetor[4] = intval(substr($retorno[$i], 253, -136));
             
-            //Cria a variavel para guardar o resultado
+                    //Cria a variavel para guardar o resultado
 		    $html = '';
 
 		    //Taxa do boleto sem pontos e virgula
@@ -43,7 +43,7 @@ Class RetornoSicredi{
 		    }
             
             //Imprime o resultado
-		    print_r($html);
+            print_r($html);
         }
     }
 
