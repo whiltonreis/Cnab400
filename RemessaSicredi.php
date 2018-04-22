@@ -170,7 +170,7 @@ Class RemessaSicredi{
 		// 03 carácter - Número do SICREDI
 		$this->titulo.= '748';
 		// 05 carácter - Código do cedente
-		$this->titulo.= $this->codCedente;
+		$this->titulo.= str_pad($this->codCedente, 5, "0", STR_PAD_LEFT);;
 		// 384 carácter - em branco 
 		$this->titulo.= self::PreencherCaracteres('384','vazio'); 
 		// 06 carácter - Número seqüencial do registro 
