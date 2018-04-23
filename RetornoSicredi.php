@@ -4,11 +4,8 @@
 * @ Data : 14/06/2016
 * @ Remessa Sicredi Cnab400
 */
-
 Class RetornoSicredi{
-
 	private $taxaDoBoleto = '1,89';
-
 	public function __construct($SetArquivo){
 		//Caminho do arquivo
 		$retorno = file($SetArquivo);
@@ -31,19 +28,20 @@ Class RetornoSicredi{
 		    //Taxa do boleto sem pontos e virgula
 		    $taxa = self::limpaCaracteres($this->taxaDoBoleto);
 		    //Processamento dos dados         
-		    if($vetor[4] > 0 && $vetor[4] != $taxa)
-		    {
-		        $html.= $vetor[1]                     . '<br>'; //Numero do Boleto
-		        $html.= self::formataData($vetor[2])  . '<br>'; //Data de Pagamento
-		        $html.= self::formataValor($vetor[3]) . '<br>'; //Valor do Boleto
-		        $html.= self::formataValor($vetor[4]) . '<hr>'; //Valor Pago
-		    }
-            
+		    if($vetor[4] > 0 && $vetor[4] != $taxa){
+			//Numero do Boleto
+		        $html.= $vetor[1]                     . '<br>';
+			//Data de Pagamento
+		        $html.= self::formataData($vetor[2])  . '<br>';
+			//Valor do Boleto
+		        $html.= self::formataValor($vetor[3]) . '<br>';
+			//Valor Pago
+		        $html.= self::formataValor($vetor[4]) . '<hr>';
+		    }            
             //Imprime o resultado
             print_r($html);
         }
     }
-
     public function formataValor($set){
         //Formata valor em real
         $set = self::limpaCaracteres($set);
@@ -52,18 +50,15 @@ Class RetornoSicredi{
         $set = number_format($set, 2, ',', '.');
         return $set;
     }
-
     public function limpaCaracteres($set){
         //Limpa caracteres especiais
         $setor = str_replace('.','',$set);
         $setor = str_replace(',','',$setor);
         return $setor;
     }
-
     public function formataData($set){
     	return date('d/m/Y',strtotime($set));
     }
 }
-
 ## EXEMPLO DE USO
 new RetornoSicredi('472950809.CRT');
