@@ -42,6 +42,7 @@ Class RetornoSicredi{
             print_r($html);
         }
     }
+	
     public function formataValor($set){
         //Formata valor em real
         $set = self::limpaCaracteres($set);
@@ -50,12 +51,14 @@ Class RetornoSicredi{
         $set = number_format($set, 2, ',', '.');
         return $set;
     }
+	
     public function limpaCaracteres($set){
         //Limpa caracteres especiais
         $setor = str_replace('.','',$set);
         $setor = str_replace(',','',$setor);
         return $setor;
     }
+	
     public function formataData($set){
     	return date('d/m/Y',strtotime($set));
     }
