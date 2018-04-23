@@ -197,10 +197,12 @@ Class RemessaSicredi{
 			return $this->vencimento;
 		}
 	}
+	
 	private function GeraTimestamp($SetData) {
 		$this->partes = explode('/', $SetData);
 		return mktime(0, 0, 0, $this->partes[1], $this->partes[0], $this->partes[2]);
 	}
+	
 	private function FormatarValor($SetValor){
 		$this->valor = str_replace("." , "" , $SetValor);
 		$this->valor = str_replace("," , "" , $SetValor);
