@@ -10,7 +10,7 @@ Class RetornoSicredi{
 	private $taxaDoBoleto = '1,89';
 
 	public function __construct($SetArquivo){
-		// Caminho do arquivo
+		//Caminho do arquivo
 		$retorno = file($SetArquivo);
 		//Conta as linhas do arquivo
 		$vetores = count($retorno);
@@ -25,14 +25,11 @@ Class RetornoSicredi{
 		    //Valor do Boleto
 		    $vetor[3] = intval(substr($retorno[$i], 152, -235));
 		    //Valor Pago
-		    $vetor[4] = intval(substr($retorno[$i], 253, -136));
-            
+		    $vetor[4] = intval(substr($retorno[$i], 253, -136));            
                     //Cria a variavel para guardar o resultado
 		    $html = '';
-
 		    //Taxa do boleto sem pontos e virgula
 		    $taxa = self::limpaCaracteres($this->taxaDoBoleto);
-
 		    //Processamento dos dados         
 		    if($vetor[4] > 0 && $vetor[4] != $taxa)
 		    {
@@ -68,4 +65,5 @@ Class RetornoSicredi{
     }
 }
 
+## EXEMPLO DE USO
 new RetornoSicredi('472950809.CRT');
