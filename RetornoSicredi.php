@@ -10,33 +10,33 @@ Class RetornoSicredi{
 		//Caminho do arquivo
 		$retorno = file($SetArquivo);
 		//Conta as linhas do arquivo
-		$vetores = count($retorno);
+		$linhas = count($retorno);
 		//Informações da carteira
-		$vetor[0] = substr($retorno[0],26, -371);
+		$linha[0] = substr($retorno[0],26, -371);
 		//Titulos
-		for($i = 1;$i < $vetores-1;$i++){
+		for($i = 1;$i < $linhas-1;$i++){
 		    //Numero do Boleto
-		    $vetor[1] = intval(substr($retorno[$i],50, -347));
+		    $linha[1] = intval(substr($retorno[$i],50, -347));
 		    //Data de Pagamento
-		    $vetor[2] = substr($retorno[$i],328, -9);
+		    $linha[2] = substr($retorno[$i],328, -9);
 		    //Valor do Boleto
-		    $vetor[3] = intval(substr($retorno[$i], 152, -235));
+		    $linha[3] = intval(substr($retorno[$i], 152, -235));
 		    //Valor Pago
-		    $vetor[4] = intval(substr($retorno[$i], 253, -136));            
+		    $linha[4] = intval(substr($retorno[$i], 253, -136));            
                     //Cria a variavel para guardar o resultado
 		    $html = '';
 		    //Taxa do boleto sem pontos e virgula
 		    $taxa = self::limpaCaracteres($this->taxaDoBoleto);
 		    //Processamento dos dados         
-		    if($vetor[4] > 0 && $vetor[4] != $taxa){
+		    if($linha[4] > 0 && $linha[4] != $taxa){
 			//Numero do Boleto
-		        $html.= $vetor[1]                     . '<br>';
+		        $html.= $linha[1]                     . '<br>';
 			//Data de Pagamento
-		        $html.= self::formataData($vetor[2])  . '<br>';
+		        $html.= self::formataData($linha[2])  . '<br>';
 			//Valor do Boleto
-		        $html.= self::formataValor($vetor[3]) . '<br>';
+		        $html.= self::formataValor($linha[3]) . '<br>';
 			//Valor Pago
-		        $html.= self::formataValor($vetor[4]) . '<hr>';
+		        $html.= self::formataValor($linha[4]) . '<hr>';
 		    }            
             //Imprime o resultado
             print_r($html);
