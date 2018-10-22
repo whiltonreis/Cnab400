@@ -45,18 +45,18 @@ Class RetornoSicredi{
 	
     public function formataValor($set){
         //Formata valor em real
-        $set = self::limpaCaracteres($set);
-        $set = ltrim($set, "0");
-        $set = $set / 100;
-        $set = number_format($set, 2, ',', '.');
-        return $set;
+        $valor = self::limpaCaracteres($set);
+        $valor = ltrim($valor, "0");
+        $valor = $valor / 100;
+        $valor = number_format($valor, 2, ',', '.');
+        return $valor;
     }
 	
     public function limpaCaracteres($set){
         //Limpa caracteres especiais
-        $setor = str_replace('.','',$set);
-        $setor = str_replace(',','',$setor);
-        return $setor;
+        $caracter = str_replace('.','',$set);
+        $caracter = str_replace(',','',$caracter);
+        return $caracter;
     }
 	
     public function formataData($set){
